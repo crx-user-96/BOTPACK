@@ -74,23 +74,23 @@ module.exports = function({ api, models, Users, Threads, Currencies }) {
     }
 
     if (command && command.config) {
-      if (command.config.usePrefix === false && commandName.toLowerCase() !== command.config.name.toLowerCase()) {
+      if (command.config.prefix === false && commandName.toLowerCase() !== command.config.name.toLowerCase()) {
         api.sendMessage(global.getText("handleCommand", "notMatched", command.config.name), event.threadID, event.messageID);
         return;
       }
-      if (command.config.usePrefix === true && !body.startsWith(PREFIX)) {
+      if (command.config.prefix === true && !body.startsWith(PREFIX)) {
         return;
       }
     }
     if (command && command.config) {
-      if (typeof command.config.usePrefix === 'undefined') {
+      if (typeof command.config.prefix === 'undefined') {
         api.sendMessage(global.getText("handleCommand", "noPrefix", command.config.name), event.threadID, event.messageID);
         return;
       }
     }
 
 
-    if (command && command.config && command.config.commandCategory && command.config.commandCategory.toLowerCase() === 'nsfw' && !global.data.threadAllowNSFW.includes(threadID) && !ADMINBOT.includes(senderID))
+    if (command && command.config && command.config.category && command.config.category.toLowerCase() === 'nsfw' && !global.data.threadAllowNSFW.includes(threadID) && !ADMINBOT.includes(senderID))
       return api.sendMessage(global.getText("handleCommand", "threadNotAllowNSFW"), threadID, async (err, info) => {
         await new Promise(resolve => setTimeout(resolve, 5 * 1000))
         return api.unsendMessage(info.messageID);
@@ -108,7 +108,7 @@ module.exports = function({ api, models, Users, Threads, Currencies }) {
     const find = threadInfoo.adminIDs.find(el => el.id == senderID);
     if (ADMINBOT.includes(senderID.toString())) permssion = 2;
     else if (!ADMINBOT.includes(senderID) && find) permssion = 1;
-    if (command && command.config && command.config.hasPermssion && command.config.hasPermssion > permssion) {
+    if (command && command.config && command.config.permssion && command.config.permssion > permssion) {
       return api.sendMessage(global.getText("handleCommand", "permissionNotEnough", command.config.name), event.threadID, event.messageID);
     }
 
