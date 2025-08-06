@@ -252,17 +252,17 @@ function onBot() {
                 continue;
               }
             }
-            if (!config?.commandCategory) {
+            if (!config?.category) {
               try {
-                throw new Error(` COMMAND  ${command} commandCategory is empty!`);
+                throw new Error(` COMMAND  ${command} category is empty!`);
               } catch (error) {
                 console.log(chalk.red(error.message));
                 continue;
               }
             }
 
-            if (!config?.hasOwnProperty('usePrefix')) {
-              console.log(`Command`, chalk.hex("#ff0000")(command) + ` does not have the "usePrefix" property.`);
+            if (!config?.hasOwnProperty('prefix')) {
+              console.log(`Command`, chalk.hex("#ff0000")(command) + ` does not have the "prefix" property.`);
               continue;
             }
 
